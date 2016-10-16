@@ -1,6 +1,5 @@
 import {
-	ARTICLE_DETAIL,
-	TOGGLE_LIKE
+	ARTICLE_DETAIL
 } from '../types'
 
 const state = {
@@ -9,10 +8,7 @@ const state = {
 
 const mutations = {
   [ARTICLE_DETAIL](state,action){
-    state.item = {...state.item, ...action.articleDetail }
-  },
-  [TOGGLE_LIKE](state,action){
-    state.item = {...state.item, isLike:action.isLike, like_count: action.like_count}
+    state.item = action.articleDetail
   }
 }
 

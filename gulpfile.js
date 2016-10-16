@@ -9,7 +9,7 @@ var gulpSequence = require('gulp-sequence')
 var nodemon = require('gulp-nodemon')
 var open = require('open')
 
-var DEV_PORT = 3000,PROD_PORT = 8400
+var DEV_PORT = 3001,PROD_PORT = 8400
 gulp.task('serve', function () {
   var webpackConfig = require('./webpack.config')
   var myConfig = Object.create(webpackConfig)
@@ -23,6 +23,11 @@ gulp.task('serve', function () {
       publicPath: myConfig.output.publicPath,
       stats: {
         colors: true
+      },
+      proxy: {
+        "/article/":     "http://localhost:3000",
+        "/image/":     "http://localhost:3000",
+        "/upload/":     "http://localhost:3000",
       }
   }).listen(DEV_PORT, 'localhost', function (err) {
       if(err) throw new gutil.PluginError('webpack-dev-server', err)

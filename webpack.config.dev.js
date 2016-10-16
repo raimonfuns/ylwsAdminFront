@@ -28,7 +28,7 @@ module.exports = {
   ],
   module: {
     preLoaders: [
-      { test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ }
+      // { test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ }
     ],
     loaders: [
       { test: /\.vue$/,loader: 'vue', include: path.join(__dirname,'src')}, 
@@ -42,13 +42,13 @@ module.exports = {
     ]
   },
   vue: {
-    loaders: {
-      js: 'babel!eslint'
-    }
+    // loaders: {
+    //   js: 'babel!eslint'
+    // }
   },
-  eslint: {
-    configFile: './.eslintrc.json'
-  },
+  // eslint: {
+  //   configFile: './.eslintrc.json'
+  // },
   resolve: {
     root: path.resolve(__dirname, 'node_modules'),
     extensions: ['','.js','.vue','.scss']

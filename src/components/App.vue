@@ -1,18 +1,20 @@
 <template>
   <div class="top-box">
     <Navbar></Navbar>
-    <router-view></router-view>
-    <Toaster></Toaster>
+    <section class="page">
+    	<Sidebar></Sidebar>
+	    <router-view></router-view>
+    </section>
   </div>
 </template>
 
 <script>
 import store from '../vuex/store'
 import Navbar from './Navbar'
-import Toaster from './Toaster'
+import Sidebar from './Sidebar'
 
 export default {
   store,
-  components: { Navbar,Toaster }
+  components: { Navbar,Sidebar }
 }
 </script>

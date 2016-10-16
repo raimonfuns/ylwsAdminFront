@@ -1,6 +1,38 @@
-import {UserResource,AuthResource,ArticleResource,TagResource,MobileResource,CommentResource} from './resources'
+import {ArticleResource, ImageResource} from './resources'
 
 export default {
+  addArticle (article) {
+    return ArticleResource.save({controller: 'addArticle'}, article)
+  },
+  getArticleList (options) {
+    return ArticleResource.get({id: 'getArticleList', ...options})
+  },
+  getArticle (id) {
+    return ArticleResource.get({id: id, controller: 'getArticle'})
+  },
+  updateArticle (article) {
+    return ArticleResource.update({id: article._id, controller: 'updateArticle'}, article)
+  },
+  deleteArticle (id) {
+    return ArticleResource.delete({id: id})
+  },
+
+  addImage (image) {
+    return ImageResource.save({controller: 'addImage'}, image)
+  },
+  getImageList (options) {
+    return ImageResource.get({id: 'getImageList', ...options})
+  },
+  getImage (id) {
+    return ImageResource.get({id: id, controller: 'getImage'})
+  },
+  updateImage (image) {
+    return ImageResource.update({id: image._id, controller: 'updateImage'}, image)
+  },
+  deleteImage (id) {
+    return ImageResource.delete({id: id})
+  },
+
   localLogin: function (data) {
     return AuthResource.save({id:'local'},data)
   },

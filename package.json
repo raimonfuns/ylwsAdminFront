@@ -67,6 +67,8 @@
   },
   "dependencies": {
     "express": "^4.14.0",
-    "serve-favicon": "^2.3.0"
+    "jade": "^1.11.0",
+    "serve-favicon": "^2.3.0",
+    "vue-file-upload": "0.0.7"
   }
 }
