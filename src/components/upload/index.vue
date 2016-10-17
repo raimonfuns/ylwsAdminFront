@@ -1,5 +1,5 @@
 <template lang="jade">
-vue-file-upload(url='/upload',
+vue-file-upload(url='/upload/image',
   v-bind:files.sync = 'files',
   v-bind:filters = "filters",
   v-bind:events = 'cbEvents',
@@ -44,7 +44,7 @@ export default{
       //回调函数绑定
       cbEvents:{
         onCompleteUpload:(file,response,status,header)=>{
-          vm.callback(response.data.fileUrl);
+          vm.callback(response.url);
         }
       },
       //xhr请求附带参数

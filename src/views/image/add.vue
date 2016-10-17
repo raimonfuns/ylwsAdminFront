@@ -58,6 +58,9 @@
                 <div class="form-group">
                   <div class="col-sm-1 control-label">图片</div>
                   <div class="col-sm-10">
+                    <div class="imageList" v-if="image.list.length > 0">
+                      <img v-bind:src="item" v-for="item in image.list" track-by="$index">
+                    </div>
                     <upload :callback="uploadCallback"></upload>
                   </div>
                 </div>
@@ -106,8 +109,30 @@ export default {
   },
   methods: {
     uploadCallback (fileUrl) {
-      vm.pageParams.singleBgUrl = fileUrl;
+      this.image.list.push(fileUrl)
     }
   }
 }
 </script>
+
+<style scoped>
+.imageList {
+  margin: 20px 0;
+  padding: 30px 0 0 42px;
+  background: #fff;
+  border-radius: 20px;
+}
+.imageList img {
+  border-radius: 20px;
+  width: 128px;
+  margin-bottom: 30px;
+  margin-right: 25px;
+}
+</style>
+
+<style>
+.fileupload-button {
+  background: #96ae60 !important;
+  border-color: #7e954c !important;
+}
+</style>

@@ -33,7 +33,7 @@
 											<tr v-for="image in imageList">
 												<td>{{image.intro}}</td>
                         <td>{{image.status ? '可见' : '屏蔽'}}</td>
-												<td><a href="/admin/image/{{image._id}}/update" class="btn btn-info btn-xs">编辑</a>
+												<td><a href="/admin/image/{{image._id}}/update" class="btn btn-info btn-xs">查看</a>
 												<button class="btn btn-danger btn-xs del-btn" @click="deleteItem(image)">删除</button></td>
 											</tr>
 										</tbody>

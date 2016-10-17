@@ -20,45 +20,42 @@
                 <div class="form-group">
                   <div class="col-sm-1 control-label">简要</div>
                   <div class="col-sm-10">
-                    <textarea name="intro" rows="3" class="form-control" v-model="image.intro"></textarea>
+                    <textarea name="intro" rows="3" class="form-control" v-model="image.intro" readonly="readonly"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-1 control-label">阅读量</div>
                   <div class="col-sm-10">
-                    <input name="reading" class="form-control" v-model="image.reading">
+                    <input name="reading" class="form-control" v-model="image.reading" readonly="readonly">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-1 control-label">价格</div>
                   <div class="col-sm-10">
-                    <input name="price" class="form-control" v-model="image.price">
+                    <input name="price" class="form-control" v-model="image.price" readonly="readonly">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-1 control-label">状态</div>
                   <div class="col-sm-10">
-                    <select name="status" class="form-control" v-model="image.status">
+                    <select name="status" class="form-control" v-model="image.status" readonly="readonly">
                       <option value="1">可见</option>
                       <option value="0">屏蔽</option>
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
-                  <div class="col-sm-1 control-label">cover</div>
-                  <div class="col-sm-11"><img id="avatar" src="" width="100" style="margin-bottom: 10px; display: none">
-                  </div>
-                  <div style="display: none" class="col-sm-1 control-label avatar-space-label"> </div>
-                  <div class="col-sm-3">
-                    <input id="uploadfile" type="file" class="form-control">
-                  </div>
-                  <div class="col-sm-3"><a href="javascript:;" id="uploadAvatar" class="btn btn-success">上传</a>
+                <div class="form-group" v-if="image.list.length > 0">
+                  <div class="col-sm-1 control-label">图片</div>
+                  <div class="col-sm-10">
+                    <div class="imageList">
+                      <img v-bind:src="item" v-for="item in image.list" track-by="$index">
+                    </div>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-sm-offset-1 col-sm-10">
-                    <button id="add-article-btn" type="submit" class="btn btn-primary" @click="updateImage(image)">保存</button>
+                    <a id="add-article-btn" type="submit" class="btn btn-primary" href="/admin/image/list/1">返回</a>
                   </div>
                 </div>
                 <input name="author_id" value="183" type="hidden" class="form-control">
@@ -101,3 +98,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.imageList {
+  margin: 20px 0;
+  padding: 30px 0 0 42px;
+  background: #fff;
+  border-radius: 20px;
+}
+.imageList img {
+  border-radius: 20px;
+  width: 128px;
+  margin-bottom: 30px;
+  margin-right: 25px;
+}
+</style>
