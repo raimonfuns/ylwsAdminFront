@@ -1,6 +1,7 @@
-import {ArticleResource, ImageResource} from './resources'
+import {ArticleResource, ImageResource, AuthResource, UserResource, UploadResource} from './resources'
 
 export default {
+  // 文章
   addArticle (article) {
     return ArticleResource.save({controller: 'addArticle'}, article)
   },
@@ -17,6 +18,7 @@ export default {
     return ArticleResource.delete({id: id})
   },
 
+  // 纹身圈
   addImage (image) {
     return ImageResource.save({controller: 'addImage'}, image)
   },
@@ -32,15 +34,25 @@ export default {
   deleteImage (id) {
     return ImageResource.delete({id: id})
   },
-
-  localLogin: function (data) {
-    return AuthResource.save({id:'local'},data)
+  localLogin (data) {
+    return AuthResource.save({id:'local'}, data)
   },
+  localRegister (data) {
+    return UserResource.save({id:'register'}, data)
+  },
+  getMe () {
+    return UserResource.get({id:'me'})
+  },
+  
+  // 图片上传
+  uploadImage (file) {
+    var formdata = new FormData()
+    formdata.append('file', file)
+    return UploadResource.save(formdata)
+  },
+
   getSnsLogins: function () {
     return UserResource.get({id:'snsLogins'})
-  },
-  getMe: function () {
-    return UserResource.get({id:'me'})
   },
   mdUser: function (data) {
     return UserResource.update({id:'mdUser'},data)

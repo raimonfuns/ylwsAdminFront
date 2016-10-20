@@ -33,7 +33,7 @@
 											<tr v-for="article in articleList">
 												<td>{{article.title}}</td>
 												<td>{{article.intro}}</td>
-												<td><a href="/admin/article/{{article._id}}/update" class="btn btn-info btn-xs">编辑</a>
+												<td><a v-link="'/admin/article/' + article._id + '/update'" class="btn btn-info btn-xs">编辑</a>
 												<button class="btn btn-danger btn-xs del-btn" @click="deleteItem(article)">删除</button></td>
 											</tr>
 										</tbody>

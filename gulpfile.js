@@ -28,6 +28,8 @@ gulp.task('serve', function () {
         "/article/":     "http://localhost:3000",
         "/image/":     "http://localhost:3000",
         "/upload/":     "http://localhost:3000",
+        "/auth/":     "http://localhost:3000",
+        "/users/":     "http://localhost:3000",
       }
   }).listen(DEV_PORT, 'localhost', function (err) {
       if(err) throw new gutil.PluginError('webpack-dev-server', err)

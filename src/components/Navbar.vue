@@ -10,11 +10,11 @@
 				</div>
 			</div>
 			<ul class="nav navbar-nav pull-right">
-				<li id="header-user" class="dropdown user">
-					<a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="/static/lib/img/avatars/avatar3.jpg"><span class="username">123</span><i class="fa fa-angle-down"></i>
+				<li id="header-user" class="dropdown user" v-bind:class="{'open': open}" @mouseover="open = true" @mouseout="open = false">
+					<a href="#" class="dropdown-toggle"><img src="http://ww4.sinaimg.cn/large/65e4f1e6jw1f8xr65b2clj20ae0ammxl.jpg"><span class="username">{{user.nickname}}</span><i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="/auth/logout"><i class="fa fa-user"></i><span>退出</span></a>
+						<li><a @click="logout"><i class="fa fa-user"></i><span>退出</span></a>
 						</li>
 					</ul>
 				</li>
@@ -24,43 +24,27 @@
 </template>
 
 <script>
-// import { changeStyleMode,logout,getUserInfo } from '../vuex/actions'
-// import defaultAvatar from '../assets/images/avatar.png'
-// import { dropdown } from 'vue-strap'
+import { logout } from '../vuex/actions'
 
-// export default {
-//   components:{
-//     dropdown
-//   },
-//   vuex:{
-//     getters:{
-//       auth: state => state.auth,
-//       styleMode: state => state.globalVal.styleMode
-//     },
-//     actions:{
-//       changeStyleMode,
-//       logout,
-//       getUserInfo
-//     }
-//   },
-//   computed: {
-//     defaultAvatar() {
-//       return defaultAvatar
-//     }
-//   },
-//   beforeCompile(){
-//     document.body.className = this.styleMode
-//   },
-//   created (){
-//     if(this.auth.token){
-//       this.getUserInfo()
-//     }
-//   },
-//   methods: {
-//     changeMode(){
-//       this.changeStyleMode()
-//       document.body.className = this.styleMode
-//     }
-//   }
-// }
+export default {
+  vuex:{
+    getters:{
+      user: state => state.auth.user
+    },
+    actions:{
+      logout
+    }
+  },
+  data () {
+  	return {
+  		open: false
+  	}
+  },
+  methods: {
+  	toggle () {
+  		console.log(this.open)
+  		this.open = !this.open
+  	}
+  }
+}
 </script>

@@ -7,7 +7,7 @@ import articleDetail from './modules/article.detail'
 import imageList from './modules/image.list'
 import imageDetail from './modules/image.detail'
 // import prenextArticle from './modules/article.prenext'
-// import auth from './modules/auth'
+import auth from './modules/auth'
 // import commentList from './modules/comment.list'
 // import globalVal from './modules/global.val'
 // import options from './modules/options'
@@ -28,7 +28,7 @@ export default new Vuex.Store({
     // prenextArticle,
     articleDetail,
     imageDetail,
-    // auth,
+    auth,
     // commentList,
     // globalVal,
     // options,

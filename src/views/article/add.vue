@@ -31,16 +31,16 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-1 control-label">cover</div>
-                  <div class="col-sm-11"><img id="avatar" src="" width="100" style="margin-bottom: 10px; display: none">
+                  <div class="col-sm-11"><img id="avatar" v-if="article.cover" v-bind:src="article.cover" width="100" style="margin-bottom: 10px;">
                   </div>
-                  <div style="display: none" class="col-sm-1 control-label avatar-space-label"> </div>
+                  <div class="col-sm-1 control-label avatar-space-label" v-if="article.cover"></div>
                   <div class="col-sm-3">
                     <input id="uploadfile" type="file" class="form-control">
                   </div>
-                  <div class="col-sm-3"><a href="javascript:;" id="uploadAvatar" class="btn btn-success">上传</a>
+                  <div class="col-sm-3"><a href="javascript:;" id="uploadAvatar" class="btn btn-success" @click="upload">上传</a>
                   </div>
                 </div>
-                <upload :callback="uploadCallback"></upload>
+                <!-- <upload :callback="uploadCallback"></upload> -->
                 <div class="form-group">
                   <div class="col-sm-1 control-label">简要</div>
                   <div class="col-sm-10">
@@ -74,7 +74,7 @@
 
 <script>
 import { addArticle } from '../../vuex/actions'
-import upload from '../../components/upload'
+import api from '../../api'
 
 export default {
   vuex:{
@@ -90,13 +90,25 @@ export default {
       article:{
         title: '',
         url: '',
+        cover: '',
         intro: '',
         status: 1
       }
     }
   },
-  components: {
-    upload
+  methods: {
+    upload () {
+      let that = this
+      let file = document.querySelector('#uploadfile').files[0]
+      api.uploadImage(file).then(response => {
+        if (!response.ok) {
+          alert('上传出错了')
+        } else {  
+          that.article.cover = response.json().url
+          console.log(response.json().url)
+        }
+      })
+    }
   }
 }
 </script>

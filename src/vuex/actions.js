@@ -1,6 +1,6 @@
 import api from '../api'
 import * as types from './types'
-import { saveCookie,signOut } from '../utils/authService'
+import { saveCookie, signOut } from '../utils/authService'
 import img from '../assets/images/shanghai.jpg'
 
 // 添加文章
@@ -105,6 +105,62 @@ export const deleteImage = (store, image) => {
   })
 }
 
+// 登录
+export const localLogin = (store, userInfo) => {
+  console.log('step2: 准备登录')
+  api.localLogin(userInfo).then(response => {
+    const json = response.json()
+    console.log('step2: 接口返回结果')
+    console.log(json)
+    const token = json.token
+    saveCookie('token', token)
+    console.log('登录成功,欢迎光临!')
+    getUserInfo(store)
+    store.dispatch(types.LOGIN_SUCCESS, {token: token })
+    // showMsg(store,'登录成功,欢迎光临!','success')
+    store.router.go({path:'/'})
+  }, response => {
+    // getCaptchaUrl(store)
+    alert(response.json().error_msg || '登录失败')
+  })
+}
+
+// 注册
+export const localRegister = (store, userInfo) => {
+  console.log('step2: 准备注册')
+  api.localRegister(userInfo).then(response => {
+    const json = response.json()
+    console.log('step2: 接口返回结果')
+    console.log(json)
+    if (json.success) {
+      console.log('step3: 注册成功，开始登录')
+      localLogin(store, userInfo)
+    }
+  }, response => {
+    // getCaptchaUrl(store)
+    alert(response.json().error_msg || '注册失败')
+  })
+}
+
+// 获取用户信息
+export const getUserInfo = ({ dispatch }) => {
+  api.getMe().then(response => {
+    if(!response.ok){
+      return dispatch(types.USERINFO_FAILURE)
+    }
+    dispatch(types.USERINFO_SUCCESS, { user: response.json().userInfo })
+  }, response => {
+    dispatch(types.USERINFO_FAILURE)
+  })
+}
+
+// 登出
+export const logout = ({dispatch, router}) => {
+  signOut()
+  dispatch(types.LOGOUT_USER)
+  window.location.pathname = '/'
+}
+
 // export const showMsg = ({dispatch}, content,type='error') => {
 //   dispatch(types.SHOW_MSG, {content:content,type:type})
 // }
@@ -132,12 +188,6 @@ export const deleteImage = (store, image) => {
 //   })
 // }
 
-// export const logout = ({dispatch, router}) => {
-//   signOut()
-//   dispatch(types.LOGOUT_USER)
-//   window.location.pathname = '/'
-// }
-
 // export const getSnsLogins = ({ dispatch }) => {
 //   api.getSnsLogins().then(response => {
 //     if(!response.ok){
@@ -146,34 +196,6 @@ export const deleteImage = (store, image) => {
 //     dispatch(types.SUCCESS_GET_SNSLOGINS, response.data.data)
 //   }, response => {
 //     dispatch(types.FAILURE_GET_SNSLOGINS)
-//   })
-// }
-
-// export const localLogin = (store, userInfo) => {
-//   api.localLogin(userInfo).then(response => {
-//     if(!response.ok){
-//       getCaptchaUrl(store)
-//       return showMsg(store,response.data.error_msg || '登录失败')
-//     }
-//     const token = response.data.token
-//     saveCookie('token',token)
-//     getUserInfo(store)
-//     store.dispatch(types.LOGIN_SUCCESS, {token: token })
-//     showMsg(store,'登录成功,欢迎光临!','success')
-//     store.router.go({path:'/'})
-//   }, response => {
-//     getCaptchaUrl(store)
-//     showMsg(store,response.data.error_msg || '登录失败')
-//   })
-// }
-// export const getUserInfo = ({ dispatch }) => {
-//   api.getMe().then(response => {
-//     if(!response.ok){
-//       return dispatch(types.USERINFO_FAILURE)
-//     }
-//     dispatch(types.USERINFO_SUCCESS, { user: response.data })
-//   }, response => {
-//     dispatch(types.USERINFO_FAILURE)
 //   })
 // }
 

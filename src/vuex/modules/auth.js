@@ -3,7 +3,7 @@ import {
 	USERINFO_SUCCESS,
 	USERINFO_FAILURE,
 	LOGOUT_USER,
-	UPDATE_USER_SUCCESS
+	// UPDATE_USER_SUCCESS
 } from '../types'
 import { getCookie } from '../../utils/authService'
 
@@ -13,13 +13,14 @@ const state = {
 }
 
 const mutations = {
-  [LOGIN_SUCCESS](state , action){
+  [LOGIN_SUCCESS](state, action){
     state.token = action.token
   },
-  [USERINFO_SUCCESS](state,action){
+  [USERINFO_SUCCESS](state, action){
+    console.log('action:', action)
     state.user = action.user
   },
-  [USERINFO_FAILURE](state,action){
+  [USERINFO_FAILURE](state){
     state.user = null
   },
   [LOGOUT_USER](state,action){
@@ -27,9 +28,9 @@ const mutations = {
     state.user = null
     state.token = null
   },
-  [UPDATE_USER_SUCCESS](state,action){
-    state.user = action.user
-  }
+  // [UPDATE_USER_SUCCESS](state,action){
+  //   state.user = action.user
+  // }
 }
 
 export default {

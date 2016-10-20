@@ -2,13 +2,13 @@
     <div class="page-bar">
         <ul>
             <li v-if="showFirst">
-              <a :href="'/admin/article/list/' + (page - 1)">上一页</a>
+              <a v-link="'/admin/article/list/' + (page - 1)">上一页</a>
             </li>
             <li v-for="index in indexs"  v-bind:class="{'active': page == index}">
-                <a :href="'/admin/article/list/' + index" v-on:click="btnClick(index)">{{ index }}</a>
+                <a v-link="'/admin/article/list/' + index" v-on:click="btnClick(index)">{{ index }}</a>
             </li>
             <li v-if="showLast">
-              <a :href="'/admin/article/list/' + (page + 1)">下一页</a>
+              <a v-link="'/admin/article/list/' + (page + 1)">下一页</a>
             </li>
             <li>
               <a>共<i>{{total}}</i>页</a>
